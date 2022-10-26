@@ -59,7 +59,7 @@ func AttrOr(n *html.Node, attrName, or string) string {
 	return or
 }
 
-// main
+// main function
 func main() {
 	doc, err := html.Parse(strings.NewReader(feedbackHtml))
 	if err != nil {
