@@ -1,0 +1,38 @@
+# Go
+# Build your Go project.
+# Add steps that test, save build artifacts, deploy, and more:
+# https://learn.microsoft.com/azure/devops/pipelines/languages/go
+# updated
+trigger: 
+- main
+- feature/*
+
+pool: ubuntu-latest
+
+variables:
+  GOPATH: '$(Agent.HomeDirectory)/go' # Go workspace path
+  GOBIN:  '$(GOPATH)/bin' # Go binaries path
+  GOROOT: '/opt/hostedtoolcache/go/1.15.8/x64' # Go installation path
+  
+
+stages:
+- stage: Build
+  displayName: Build image
+  
+  jobs:  
+  - job: BuildAndTest
+    displayName: Build And Test
+    pool: ubuntu-latest
+    steps:
+    - checkout: self
+    - script: |
+        export PATH="$(GOROOT)/bin:$(PATH)"
+        printenv
+        ls -la
+        go env
+        go version
+        go mod download
+        go build ./...
+        go test ./... 
+      workingDirectory: '$(Build.SourcesDirectory)'
+      displayName: 'Get dependencies, then build and test' 
