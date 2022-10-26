@@ -1,5 +1,4 @@
-# go-cascadia-sample
-
+#  ![go-cascadia-sample](https://github.com/yuvan11/cascadia-sample/actions/workflows/go.yml/badge.svg)
 
 ## Description
 
